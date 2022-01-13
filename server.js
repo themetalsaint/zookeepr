@@ -67,26 +67,6 @@ function createNewAnimal(body, animalsArray) {
 }
 // End createNewAnimal Function
 
-// dont know where to put this, there is no handleAnimalCreation function
-fetch("/api/animals", {
-  method: "POST",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(animalObject),
-})
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-    alert("Error: " + response.statusText);
-  })
-  .then((postResponse) => {
-    console.log(postResponse);
-    alert("Thank you for adding an animal!");
-  });
-
 // Start validateAnimal function
 function validateAnimal(animal) {
   if (!animal.name || typeof animal.name !== "string") {
