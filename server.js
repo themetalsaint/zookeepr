@@ -1,9 +1,11 @@
+// Necessary Packages
 const express = require("express");
 const { animals } = require("./data/animals");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Start filterQuery function
 function filterByQuery(query, animalsArray) {
   let personalityTraitsArray = [];
   let filteredResults = animalsArray;
@@ -36,12 +38,14 @@ function filterByQuery(query, animalsArray) {
   }
   return filteredResults;
 }
+// End FilterQuery Function
 
 function findById(id, animalsArray) {
   const result = animalsArray.filter((animal) => animal.id === id)[0];
   return result;
 }
 
+// Start Get Routes
 app.get("/api/animals", (req, res) => {
   let results = animals;
   if (req.query) {
@@ -58,7 +62,16 @@ app.get("/api/animals/:id", (req, res) => {
     res.send(404);
   }
 });
+// End Get Routes
 
+// Start POST Route
+app.post("/api/animals", (req, res) => {
+  console.log(req.body);
+  res.json(req.body);
+});
+// End POST Route
+
+// Bottom of serverJS
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}!`);
 });
