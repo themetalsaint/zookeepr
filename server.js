@@ -67,6 +67,26 @@ function createNewAnimal(body, animalsArray) {
 }
 // End createNewAnimal Function
 
+// dont know where to put this, there is no handleAnimalCreation function
+fetch("/api/animals", {
+  method: "POST",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(animalObject),
+})
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    alert("Error: " + response.statusText);
+  })
+  .then((postResponse) => {
+    console.log(postResponse);
+    alert("Thank you for adding an animal!");
+  });
+
 // Start validateAnimal function
 function validateAnimal(animal) {
   if (!animal.name || typeof animal.name !== "string") {
@@ -105,6 +125,21 @@ app.get("/api/animals/:id", (req, res) => {
 
 // This is the GET route that sends the html page to the client
 app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+
+app.get("/animals", (req, res) => {
+  res.sendFile(path, join(__dirname, "./public/animals.html"));
+});
+
+app.get("/zookeepers", (req, res) => {
+  res.sendFile(path, join(__dirname, "./public/zookeepers.html"));
+});
+
+// This is a wildcard route, to catch any other requests the client makes
+// The "*" should always be the last GET route, so it doesn't take
+// precedence over the other GET routes.
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 // End Get Routes
