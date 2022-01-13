@@ -45,10 +45,19 @@ function filterByQuery(query, animalsArray) {
 }
 // End FilterQuery Function
 
+// Start findById function
 function findById(id, animalsArray) {
   const result = animalsArray.filter((animal) => animal.id === id)[0];
   return result;
 }
+// End findById function
+
+// Start createNewAnimal Function
+function createNewAnimal(body, animalsArray) {
+  console.log(body);
+  return body;
+}
+// End createNewAnimal Function
 
 // Start Get Routes
 app.get("/api/animals", (req, res) => {
