@@ -10,6 +10,7 @@ const app = express();
 // Start Parsing function
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
 // End Parsing function
 
 // Start filterQuery function
@@ -100,6 +101,11 @@ app.get("/api/animals/:id", (req, res) => {
   } else {
     res.send(404);
   }
+});
+
+// This is the GET route that sends the html page to the client
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 // End Get Routes
 
