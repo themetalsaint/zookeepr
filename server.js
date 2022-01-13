@@ -5,6 +5,11 @@ const { animals } = require("./data/animals");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Start Parsing function
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// End Parsing function
+
 // Start filterQuery function
 function filterByQuery(query, animalsArray) {
   let personalityTraitsArray = [];
